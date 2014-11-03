@@ -31,7 +31,7 @@ pushMsg.onRelease = function() {
 	msgGO();
 };
 Bconn.onRelease = function() {
-	mySocket.connect("server.maahad.net", 9999);
+	mySocket.connect("localhost", 9999);
 	Bconn.enabled=false;
 };
 pushMsg.enabled=false;
