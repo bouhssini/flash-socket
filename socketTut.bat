@@ -1,0 +1,1 @@
+c:/web/php/php.exe -q c:/web/Apache2/htdocs/socketTut.php
