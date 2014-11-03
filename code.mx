@@ -1,0 +1,38 @@
+mySocket = new XMLSocket();
+mySocket.onConnect = function(success) {
+	if (success) {
+		msgArea.htmlText += "<b>Server connection established!</b>";
+		pushMsg.enabled=true;
+		Bconn.enabled=false;
+	} else {
+		msgArea.htmlText += "<b>Server connection failed!</b>";
+		pushMsg.enabled=false;
+		Bconn.enabled=true;
+		chr(0)
+	}
+};
+mySocket.onClose = function() {
+	msgArea.htmlText += "<b>Server connection lost</b>";
+	pushMsg.enabled=false;
+	Bconn.enabled=true;
+};
+XMLSocket.prototype.onData = function(msg) {
+	msgArea.htmlText += msg;
+};
+
+//--- Handle button click --------------------------------------
+function msgGO() {
+	if (inputMsg.htmlText != "") {
+		mySocket.send(inputMsg.htmlText+"\n");
+		inputMsg.htmlText = "";
+	}
+}
+pushMsg.onRelease = function() {
+	msgGO();
+};
+Bconn.onRelease = function() {
+	mySocket.connect("server.maahad.net", 9999);
+	Bconn.enabled=false;
+};
+pushMsg.enabled=false;
+Bconn.enabled=true;
